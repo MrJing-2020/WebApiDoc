@@ -4,14 +4,21 @@ const routers = [
         meta: {
             title: ''
         },
-        component: (resolve) => require(['./App.vue'], resolve)
+        component: (resolve) => require(['./Detail.vue'], resolve)
     },
     {
-        path: '/mrjing',
+        path: '/edit',
         meta: {
             title: ''
         },
-        component: (resolve) => require(['./MrJing.vue'], resolve)
+        component: (resolve) => require(['./Edit.vue'], resolve)
+    },
+    {
+        path: '/detail',
+        meta: {
+            title: ''
+        },
+        component: (resolve) => require(['./Detail.vue'], resolve)
     }
 ];
 export default routers;
