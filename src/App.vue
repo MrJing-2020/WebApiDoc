@@ -61,9 +61,6 @@
     margin-left: 5%;
     font-size: 20px;
   }
-  .layout-breadcrumb{
-    margin-bottom: 20px;
-  }
   .route-a{
     color:white;
   }
@@ -96,21 +93,12 @@
                 用户管理模块
             </template>
               <router-link to="/detail" class="route-a ivu-menu-item">编辑</router-link>
-              <router-link to="/detail" class="route-a ivu-menu-item">权限分配</router-link>
+              <router-link to="/apilist" class="route-a ivu-menu-item">角色管理</router-link>
             </Submenu>
           </Menu>
         </i-col>
         <i-col span="20" class="custom-content-right">
-          <div class="layout-breadcrumb">
-            <Breadcrumb>
-              <Breadcrumb-item href="#">首页</Breadcrumb-item>
-              <Breadcrumb-item href="#">应用中心</Breadcrumb-item>
-              <Breadcrumb-item>某应用</Breadcrumb-item>
-            </Breadcrumb>
-          </div>
-          <div class="layout-content-main">
-            <router-view></router-view>
-          </div>
+          <router-view></router-view>
         </i-col>
       </Row>
     </div>

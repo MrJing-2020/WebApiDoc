@@ -6,9 +6,6 @@ import 'iview/dist/styles/iview.css';
 import App from './App.vue';
 import VueHtml5Editor from 'vue-html5-editor';
 
-// import ElementUI from 'element-ui'
-// import 'element-ui/lib/theme-default/index.css'
-
 Vue.use(VueRouter);
 Vue.use(iView);
 var options = {

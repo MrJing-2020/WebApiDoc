@@ -9,7 +9,6 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
-    "element-ui": "^1.2.8",
     "iview": "^2.0.0-rc.9",
     "vue": "^2.2.1"
   },

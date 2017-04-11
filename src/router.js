@@ -19,6 +19,13 @@ const routers = [
             title: ''
         },
         component: (resolve) => require(['./Detail.vue'], resolve)
+    },
+    {
+        path: '/apilist',
+        meta: {
+            title: ''
+        },
+        component: (resolve) => require(['./ApiList.vue'], resolve)
     }
 ];
 export default routers;
