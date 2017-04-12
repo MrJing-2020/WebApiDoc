@@ -90,10 +90,12 @@
             <Submenu name="2">
               <template slot="title">
                 <Icon type="ios-keypad"></Icon>
-                用户管理模块
+                用户相关模块
             </template>
-              <router-link to="/detail" class="route-a ivu-menu-item">编辑</router-link>
+              <!--<router-link to="/detail" class="route-a ivu-menu-item">编辑</router-link>-->
+              <router-link to="/apilist" class="route-a ivu-menu-item">用户管理</router-link>
               <router-link to="/apilist" class="route-a ivu-menu-item">角色管理</router-link>
+              <router-link to="/apilist" class="route-a ivu-menu-item">授权</router-link>
             </Submenu>
           </Menu>
         </i-col>
