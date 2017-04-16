@@ -8,7 +8,12 @@
             </Breadcrumb>
         </div>
         <div class="layout-content-main">
-            <Table border :context="self" :columns="columns7" :data="data6"></Table>
+            <Table v-if="isShow === true" border :context="self" :columns="columns7" :data="data6"></Table>
+            <Tabs v-if="isShow === false" :animated="false">
+                <Tab-pane label="请求信息">标签一的内容</Tab-pane>
+                <Tab-pane label="响应数据">标签二的内容</Tab-pane>
+                <Tab-pane label="接口说明">标签三的内容</Tab-pane>
+            </Tabs>
         </div>
     </div>
 </template>
@@ -39,7 +44,7 @@
                         width: 150,
                         align: 'center',
                         render (row, column, index) {
-                            return `<i-button type="primary" size="small" @click="show(${index})">查看</i-button> <i-button type="error" size="small" @click="remove(${index})">删除</i-button>`;
+                            return `<i-button type="primary" size="small" @click="edit(${row.age})">编辑</i-button><i-button type="primary" size="small" @click="show(${row.age})">查看</i-button> <i-button type="error" size="small" @click="remove(${index})">删除</i-button>`;
                         }
                     }
                 ],
@@ -64,15 +69,21 @@
                         age: 26,
                         address: '深圳市南山区深南大道'
                     }
-                ]
+                ],
+                isShow:true
             }
         },
         methods: {
             show (index) {
-                this.$Modal.info({
-                    title: '用户信息',
-                    content: `姓名：${this.data6[index].name}<br>年龄：${this.data6[index].age}<br>地址：${this.data6[index].address}`
-                })
+//                this.$Modal.info({
+//                    title: '用户信息',
+//                    content: `姓名：${this.data6[index].name}<br>年龄：${this.data6[index].age}<br>地址：${this.data6[index].address}`
+//                })
+                this.isShow=false;
+                alert(index)
+            },
+            edit (index) {
+                this.$router.push('edit/'+index)
             },
             remove (index) {
                 this.data6.splice(index, 1);

@@ -1,12 +1,15 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Routers from './router';
 import iView from 'iview';
 import 'iview/dist/styles/iview.css';
+import VueResource from 'vue-resource';
+
+import Routers from './router';
 import App from './App.vue';
 import VueHtml5Editor from 'vue-html5-editor';
 
 Vue.use(VueRouter);
+Vue.use(VueResource);
 Vue.use(iView);
 var options = {
     // 全局组件名称，使用new VueHtml5Editor(options)时该选项无效
@@ -142,13 +145,22 @@ var options = {
     }
 };
 Vue.use(VueHtml5Editor,options);
-// Vue.use(ElementUI)
 
 const RouterConfig = {
     mode: 'history',
     routes: Routers
 };
 const router = new VueRouter(RouterConfig);
+
+router.beforeEach((to, from, next) => {
+    iView.LoadingBar.start();
+    next();
+});
+
+router.afterEach((to, from, next) => {
+    iView.LoadingBar.finish();
+    window.scrollTo(0, 0);
+});
 
 new Vue({
   el: '#app',

@@ -85,7 +85,7 @@
                 <Icon type="ios-navigate"></Icon>
                 文档管理
             </template>
-              <router-link to="/edit" class="route-a ivu-menu-item">新增</router-link>
+              <router-link to="/edit/1" class="route-a ivu-menu-item">新增</router-link>
             </Submenu>
             <Submenu name="2">
               <template slot="title">

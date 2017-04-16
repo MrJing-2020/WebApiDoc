@@ -7,7 +7,7 @@ const routers = [
         component: (resolve) => require(['./Detail.vue'], resolve)
     },
     {
-        path: '/edit',
+        path: '/edit/:id',
         meta: {
             title: ''
         },
