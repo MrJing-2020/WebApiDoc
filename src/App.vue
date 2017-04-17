@@ -78,7 +78,7 @@
     <div class="layout-content">
       <Row>
         <i-col span="4" class="custom-content-left">
-          <Menu active-name="1-2" theme="dark" width="auto" :open-names="['1']">
+          <Menu active-name="1-2" theme="dark" width="auto" :open-names="['2']">
             <div class="layout-logo-left"></div>
             <Submenu name="1">
               <template slot="title">
@@ -92,10 +92,8 @@
                 <Icon type="ios-keypad"></Icon>
                 用户相关模块
             </template>
-              <!--<router-link to="/detail" class="route-a ivu-menu-item">编辑</router-link>-->
-              <router-link to="/apilist" class="route-a ivu-menu-item">用户管理</router-link>
-              <router-link to="/apilist" class="route-a ivu-menu-item">角色管理</router-link>
-              <router-link to="/apilist" class="route-a ivu-menu-item">授权</router-link>
+              <router-link to="/apilist/1" class="route-a ivu-menu-item">用户管理</router-link>
+              <router-link to="/apilist/2" class="route-a ivu-menu-item">角色管理</router-link>
             </Submenu>
           </Menu>
         </i-col>

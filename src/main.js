@@ -11,6 +11,7 @@ import VueHtml5Editor from 'vue-html5-editor';
 Vue.use(VueRouter);
 Vue.use(VueResource);
 Vue.use(iView);
+
 var options = {
     // 全局组件名称，使用new VueHtml5Editor(options)时该选项无效
     // global component name
@@ -160,6 +161,15 @@ router.beforeEach((to, from, next) => {
 router.afterEach((to, from, next) => {
     iView.LoadingBar.finish();
     window.scrollTo(0, 0);
+});
+
+Vue.http.interceptors.push(function(request, next) {
+
+    // modify headers
+    request.headers.set('Authorization', 'Bearer A1oNtbb1rWC6KnoE1zOPILb1Umc9TNeSgwpdHn9ol4puT7pRfAuEuWqw4MdDo1Q8bC5otYQjYXajjWq8ZLmJTfUhtgIVnoYaLBG2e_X1OgdxDxrbHUmQWD4_bOV4ETPd5STK15qdCFskNh3o6glsQQFyeWnCy_oc-l-8LNlK8_CGFxWAzikuX2iXuMrFi0OFgH56tuVQtq59v0DuJfKwowXyLuqy4lJqGLfnyMcw-Xxom-NRRtmQksP4YKbf9hvbGAirurRYrrA535lsvdQvhJzpGadOLuPBLGONi4bOxBUF2q0oB3Za6vW9vUEDwUkVsGJJk8Tny-x7dqDa6a15lsW2mvf3kfE9OI7AvKnQxtk3rSSZvKqSEucbJ5kL3eV21YBAi03GA9OzwMjvemIEsk5d01afRHYs3EEuF801l7F3CZX-0vHNZhD4RKZr4BAcD54A9zbU1iL8XGWrKabM3weLTshUTi7hnYq-jkLaqg3eDn-kzwEKPWDMx6M5p2cwCSOWRg9S4Z4UB-8j6NaEDQ');
+
+    // continue to next interceptor
+    next();
 });
 
 new Vue({

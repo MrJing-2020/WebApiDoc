@@ -8,12 +8,7 @@
             </Breadcrumb>
         </div>
         <div class="layout-content-main">
-            <Table v-if="isShow === true" border :context="self" :columns="columns7" :data="data6"></Table>
-            <Tabs v-if="isShow === false" :animated="false">
-                <Tab-pane label="请求信息">标签一的内容</Tab-pane>
-                <Tab-pane label="响应数据">标签二的内容</Tab-pane>
-                <Tab-pane label="接口说明">标签三的内容</Tab-pane>
-            </Tabs>
+            <Table border :context="self" :columns="columns" :data="tableData"></Table>
         </div>
     </div>
 </template>
@@ -22,72 +17,60 @@
         data () {
             return {
                 self: this,
-                columns7: [
+                loading: false,
+                tableData: null,
+                columns: [
                     {
-                        title: '姓名',
-                        key: 'name',
+                        title: '接口名',
+                        key: 'Name',
                         render (row, column, index) {
-                            return `<Icon type="person"></Icon> <strong>${row.name}</strong>`;
+                            return `<Icon type="person"></Icon> <strong>${row.Name}</strong>`;
                         }
                     },
                     {
-                        title: '年龄',
-                        key: 'age'
-                    },
-                    {
-                        title: '地址',
-                        key: 'address'
+                        title: 'http方法',
+                        key: 'HttpMethod'
                     },
                     {
                         title: '操作',
-                        key: 'action',
-                        width: 150,
+                        key: 'Id',
+                        width: 200,
                         align: 'center',
                         render (row, column, index) {
-                            return `<i-button type="primary" size="small" @click="edit(${row.age})">编辑</i-button><i-button type="primary" size="small" @click="show(${row.age})">查看</i-button> <i-button type="error" size="small" @click="remove(${index})">删除</i-button>`;
+                            return `<i-button type="info" size="small" @click="show('${row.Id}')">查看</i-button> <i-button type="primary" size="small" @click="edit('${row.Id}')">编辑</i-button> <i-button type="error" size="small" @click="remove('${row.Id}')">删除</i-button>`;
                         }
                     }
-                ],
-                data6: [
-                    {
-                        name: '王小明',
-                        age: 18,
-                        address: '北京市朝阳区芍药居'
-                    },
-                    {
-                        name: '张小刚',
-                        age: 25,
-                        address: '北京市海淀区西二旗'
-                    },
-                    {
-                        name: '李小红',
-                        age: 30,
-                        address: '上海市浦东新区世纪大道'
-                    },
-                    {
-                        name: '周小伟',
-                        age: 26,
-                        address: '深圳市南山区深南大道'
-                    }
-                ],
-                isShow:true
+                ]
             }
         },
+        created () {
+            // 组件创建完后获取数据，
+            this.fetchData()
+        },
         methods: {
-            show (index) {
-//                this.$Modal.info({
-//                    title: '用户信息',
-//                    content: `姓名：${this.data6[index].name}<br>年龄：${this.data6[index].age}<br>地址：${this.data6[index].address}`
-//                })
-                this.isShow=false;
-                alert(index)
+            show (id) {
+                this.$router.push('/detail/'+id);
             },
-            edit (index) {
-                this.$router.push('edit/'+index)
+            edit (id) {
+                this.$router.push('/edit/'+id);
             },
-            remove (index) {
-                this.data6.splice(index, 1);
+            remove (id) {
+            },
+            fetchData (){
+                this.error = this.post = null
+                this.loading = true
+                this.$http.get('http://localhost:8015/api/ApiDoc/Document/GetApiDocList', {id:this.$route.params.id}).then(response => {
+                    this.loading = false
+                    this.tableData = response.body;
+                }, response => {
+                    this.loading = false
+                    // error callback
+                });
             }
-        }
+        },
+        watch: {
+            // 如果路由有变化，会再次执行该方法
+            '$route': 'fetchData'
+        },
     }
 </script>

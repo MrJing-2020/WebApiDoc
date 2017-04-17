@@ -14,14 +14,14 @@ const routers = [
         component: (resolve) => require(['./Edit.vue'], resolve)
     },
     {
-        path: '/detail',
+        path: '/detail/:id',
         meta: {
             title: ''
         },
         component: (resolve) => require(['./Detail.vue'], resolve)
     },
     {
-        path: '/apilist',
+        path: '/apilist/:id',
         meta: {
             title: ''
         },
