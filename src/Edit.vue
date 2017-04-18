@@ -8,37 +8,44 @@
         </div>
         <div class="layout-content-main">
             <Form :model="formItem" :label-width="80">
+                <input type="hidden" v-model="formItem.Id"/>
                 <Form-item label="功能模块">
-                    <Select v-model="formItem.selectModule" placeholder="请选择">
-                        <Option value="GET">GET</Option>
-                        <Option value="POST">POST</Option>
+                    <Select v-model="formItem.ApiId" placeholder="请选择">
+                        <Option v-for="option in moudle" v-bind:value="option.Id">
+                            {{ option.Name }}
+                        </Option>
                     </Select>
                 </Form-item>
                 <Form-item label="接口名">
-                    <Input v-model="formItem.inputApiName" placeholder="请输入"></Input>
+                    <Input v-model="formItem.Name" placeholder="请输入"></Input>
                 </Form-item>
                 <Form-item label="HTTP方法">
-                    <Select v-model="formItem.selectHttp" placeholder="请选择">
+                    <Select v-model="formItem.HttpMethod" placeholder="请选择">
                         <Option value="GET">GET</Option>
                         <Option value="POST">POST</Option>
                     </Select>
                 </Form-item>
                 <Form-item label="URL">
-                    <Input v-model="formItem.inputUrl" placeholder="请输入"></Input>
+                    <Input v-model="formItem.Url" placeholder="请输入"></Input>
                 </Form-item>
-
+                <Form-item label="参数类型">
+                    <Input v-model="formItem.SupportType" placeholder="请输入"></Input>
+                </Form-item>
                 <Form-item label="参数">
-                    <vue-html5-editor :content="formItem.editParameter" :height="100" :z-index="1000" :auto-height="true" :show-module-name="false"></vue-html5-editor>
+                    <vue-html5-editor @change="updateRequestParms" :content="formItem.RequestParms" :height="100" :z-index="1000" :auto-height="true" :show-module-name="false"></vue-html5-editor>
                 </Form-item>
                 <Form-item label="返回数据">
-                    <vue-html5-editor :content="formItem.editReturnValue" :height="200" :z-index="1000" :auto-height="true" :show-module-name="false"></vue-html5-editor>
+                    <vue-html5-editor @change="updateReturnData" :content="formItem.ReturnData" :height="200" :z-index="1000" :auto-height="true" :show-module-name="false"></vue-html5-editor>
+                </Form-item>
+                <Form-item label="返回错误">
+                    <vue-html5-editor @change="updateErrorResult" :content="formItem.ErrorResult" :height="100" :z-index="1000" :auto-height="true" :show-module-name="false"></vue-html5-editor>
                 </Form-item>
                 <Form-item label="说明">
-                    <Input v-model="formItem.description" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="请输入..."></Input>
+                    <Input v-model="formItem.Description" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="请输入..."></Input>
                 </Form-item>
                 <Form-item>
                     <Button type="primary" v-on:click="submitForm">提交</Button>
-                    <Button type="ghost" style="margin-left: 8px">取消</Button>
+                    <Button type="ghost" v-on:click="goBack" style="margin-left: 8px">取消</Button>
                 </Form-item>
             </Form>
         </div>
@@ -47,43 +54,53 @@
 <script>
     export default {
         data () {
-            var formItem = {inputApiName: '哈哈',};
-            this.$http.get('/someUrl', {id:this.$route.params.id}).then(response => {
-                var formItem=response.body;
-                formItem.inputApiName="";
-            }, response => {
-                // error callback
-                formItem.inputApiName="哈哈哈哈或";
-            });
-            return {formItem:formItem};
-//            return {
-//                formItem: {
-//                    selectModule:'',
-//                    inputApiName: '',
-//                    selectHttp: '',
-//                    inputUrl:'',
-//                    editParameter:'111',
-//                    editReturnValue:'222',
-//                    description: ''
-//                }
-//            }
+            return {
+                formItem:{},
+                moudle:[]
+            }
         },
         methods: {
             submitForm: function (event) {
                 // POST /someUrl
-                this.$http.post('/someUrl', this.formItem).then(response => {
-                    // get status
-                    response.status;
-                    // get status text
-                    response.statusText;
-                    // get 'Expires' header
-                    response.headers.get('Expires');
-                    // get body data
-                    this.someData = response.body;
+                this.$http.post('http://localhost:8015/api/ApiDoc/Document/SubDocData',this.formItem).then(response => {
+                    this.$router.push('/detail/'+this.formItem.Id);
                 }, response => {
                     // error callback
                 });
+            },
+            fetchData (){
+                if(this.$route.params.id!=null&&this.$route.params.id!=undefined){
+                    this.$http.get('http://localhost:8015/api/ApiDoc/Document/GetDocDetail/'+this.$route.params.id).then(response => {
+                        this.formItem = response.body;
+                    }, response => {
+                    });
+                }
+            },
+            updateRequestParms(content){
+                this.formItem.RequestParms=content;
+            },
+            updateReturnData(content){
+                this.formItem.ReturnData=content;
+            },
+            updateErrorResult(content){
+                this.formItem.ErrorResult=content;
+            },
+            goBack(){
+                this.$router.go(-1)
+            },
+            getMoudle(){
+                this.$http.get('http://localhost:8015/api/ApiDoc/Document/GetApiData').then(response => {
+                    this.moudle = response.body;
+                }, response => {
+                });
             }
+        },
+        created () {
+            this.fetchData();
+            this.getMoudle()
+        },
+        watch: {
+            '$route': 'fetchData'
         }
     }
 </script>

@@ -6,7 +6,7 @@ import VueResource from 'vue-resource';
 
 import Routers from './router';
 import App from './App.vue';
-import VueHtml5Editor from 'vue-html5-editor';
+import VueHtml5Editor from 'vue-html5-editor'
 
 Vue.use(VueRouter);
 Vue.use(VueResource);
@@ -145,7 +145,7 @@ var options = {
         //omit,reference to source code of build-in modules
     }
 };
-Vue.use(VueHtml5Editor,options);
+Vue.use(VueHtml5Editor);
 
 const RouterConfig = {
     mode: 'history',
@@ -166,7 +166,7 @@ router.afterEach((to, from, next) => {
 Vue.http.interceptors.push(function(request, next) {
 
     // modify headers
-    request.headers.set('Authorization', 'Bearer A1oNtbb1rWC6KnoE1zOPILb1Umc9TNeSgwpdHn9ol4puT7pRfAuEuWqw4MdDo1Q8bC5otYQjYXajjWq8ZLmJTfUhtgIVnoYaLBG2e_X1OgdxDxrbHUmQWD4_bOV4ETPd5STK15qdCFskNh3o6glsQQFyeWnCy_oc-l-8LNlK8_CGFxWAzikuX2iXuMrFi0OFgH56tuVQtq59v0DuJfKwowXyLuqy4lJqGLfnyMcw-Xxom-NRRtmQksP4YKbf9hvbGAirurRYrrA535lsvdQvhJzpGadOLuPBLGONi4bOxBUF2q0oB3Za6vW9vUEDwUkVsGJJk8Tny-x7dqDa6a15lsW2mvf3kfE9OI7AvKnQxtk3rSSZvKqSEucbJ5kL3eV21YBAi03GA9OzwMjvemIEsk5d01afRHYs3EEuF801l7F3CZX-0vHNZhD4RKZr4BAcD54A9zbU1iL8XGWrKabM3weLTshUTi7hnYq-jkLaqg3eDn-kzwEKPWDMx6M5p2cwCSOWRg9S4Z4UB-8j6NaEDQ');
+    request.headers.set('Authorization', 'bearer dGh5QJXn8bSnB2G6UN0QxSLzGWfOKnNkdXuxdWpMeCeuhTn7v7oj6G0sTRsHlv_ZlRE4imbW3d82j5lZ9k2as2twC6SR7KwECuar1CalxroFsZWZwGhsf8XE07-y1zHoZWHceIIq2xO5MJ7iD2NiPf4aFjoAcgLYUT7nCAkkd4P-IGQWyNuw7DDr7e33yTKp5byt4TMWqSyCwj2qNevPU8NApkz0Z6AbkfvF3M2ls3Tmagw3PVkvfoVens0e-gy1BnkYuljJqMHVsoPRn9WwAP7LGhhbM319JxBqJrzX_SCd-Hyl_4eXWJ919StrWzQlDKMKnF76S-Ti-CfJchscXqtIlXPCk2qnFzzidEF3pi4pc2r_BmsuIX_H06D6e9ebp3uxTiNzVkFVBwl6mXwDFzHZl-ukaFw6s2GNHMq3IIy6xraaLDNa4D_Qq8a7gpjMpEQw95ugohuQABf8hWecSr1T6aZesCTbGhP1CEAJd81BRgatma2IKrY4qCkRYlVzi7SwBGZ4aSO5q36KNknIUQ');
 
     // continue to next interceptor
     next();

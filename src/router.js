@@ -14,6 +14,13 @@ const routers = [
         component: (resolve) => require(['./Edit.vue'], resolve)
     },
     {
+        path: '/edit',
+        meta: {
+            title: ''
+        },
+        component: (resolve) => require(['./Edit.vue'], resolve)
+    },
+    {
         path: '/detail/:id',
         meta: {
             title: ''

@@ -64,6 +64,9 @@
   .route-a{
     color:white;
   }
+  .custom-left-menu{
+    padding: 0px;
+  }
 </style>
 <template>
   <div class="layout">
@@ -80,20 +83,19 @@
         <i-col span="4" class="custom-content-left">
           <Menu active-name="1-2" theme="dark" width="auto" :open-names="['2']">
             <div class="layout-logo-left"></div>
-            <Submenu name="1">
+            <Submenu  name="1">
               <template slot="title">
                 <Icon type="ios-navigate"></Icon>
                 文档管理
             </template>
-              <router-link to="/edit/1" class="route-a ivu-menu-item">新增</router-link>
+              <router-link  to="/edit" class="route-a ivu-menu-item">新增</router-link>
             </Submenu>
             <Submenu name="2">
               <template slot="title">
                 <Icon type="ios-keypad"></Icon>
-                用户相关模块
+                API文档
             </template>
-              <router-link to="/apilist/1" class="route-a ivu-menu-item">用户管理</router-link>
-              <router-link to="/apilist/2" class="route-a ivu-menu-item">角色管理</router-link>
+              <router-link v-for="menu in menuList" v-on:click="activeChange" v-bind:to="'/apilist/'+menu.Id" class="route-a ivu-menu-item">{{menu.Name}}</router-link>
             </Submenu>
           </Menu>
         </i-col>
@@ -108,17 +110,29 @@
     export default {
         data () {
             return {
-                formItem: {
-                    input: '',
-                    select: '',
-                    radio: 'male',
-                    checkbox: [],
-                    switch: true,
-                    date: '',
-                    time: '',
-                    slider: [20, 50],
-                    textarea: ''
-                }
+                menuList: [],
+            }
+        },
+        created () {
+            this.fetchData()
+        },
+        methods: {
+            show (id) {
+                this.$router.push('/detail/'+id);
+            },
+            edit (id) {
+                this.$router.push('/edit/'+id);
+            },
+            remove (id) {
+            },
+            fetchData (){
+                this.$http.get('http://localhost:8015/api/ApiDoc/Document/GetApiData').then(response => {
+                    this.menuList = response.body;
+                }, response => {
+                });
+            },
+            activeChange(){
+
             }
         }
     }

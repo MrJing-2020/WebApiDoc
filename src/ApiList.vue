@@ -8,7 +8,7 @@
             </Breadcrumb>
         </div>
         <div class="layout-content-main">
-            <Table border :context="self" :columns="columns" :data="tableData"></Table>
+            <Table :context="self" :columns="theader" :data="tbody"></Table>
         </div>
     </div>
 </template>
@@ -16,10 +16,9 @@
     export default {
         data () {
             return {
-                self: this,
-                loading: false,
-                tableData: null,
-                columns: [
+                self:this,
+                tbody: [],
+                theader: [
                     {
                         title: '接口名',
                         key: 'Name',
@@ -30,6 +29,10 @@
                     {
                         title: 'http方法',
                         key: 'HttpMethod'
+                    },
+                    {
+                        title: '说明',
+                        key: 'Description'
                     },
                     {
                         title: '操作',
@@ -44,7 +47,6 @@
             }
         },
         created () {
-            // 组件创建完后获取数据，
             this.fetchData()
         },
         methods: {
@@ -57,20 +59,14 @@
             remove (id) {
             },
             fetchData (){
-                this.error = this.post = null
-                this.loading = true
-                this.$http.get('http://localhost:8015/api/ApiDoc/Document/GetApiDocList', {id:this.$route.params.id}).then(response => {
-                    this.loading = false
-                    this.tableData = response.body;
+                this.$http.get('http://localhost:8015/api/ApiDoc/Document/GetApiDetail/'+this.$route.params.id).then(response => {
+                    this.tbody = response.body;
                 }, response => {
-                    this.loading = false
-                    // error callback
                 });
             }
         },
         watch: {
-            // 如果路由有变化，会再次执行该方法
             '$route': 'fetchData'
-        },
+        }
     }
 </script>
