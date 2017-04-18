@@ -41,7 +41,7 @@
                     <vue-html5-editor @change="updateErrorResult" :content="formItem.ErrorResult" :height="100" :z-index="1000" :auto-height="true" :show-module-name="false"></vue-html5-editor>
                 </Form-item>
                 <Form-item label="说明">
-                    <Input v-model="formItem.Description" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="请输入..."></Input>
+                    <Input v-model="formItem.Description" type="textarea"  placeholder="请输入..."></Input>
                 </Form-item>
                 <Form-item>
                     <Button type="primary" v-on:click="submitForm">提交</Button>
