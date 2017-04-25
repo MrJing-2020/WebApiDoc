@@ -4,7 +4,7 @@ const routers = [
         meta: {
             title: ''
         },
-        component: (resolve) => require(['./Detail.vue'], resolve)
+        component: (resolve) => require(['./Edit.vue'], resolve)
     },
     {
         path: '/edit/:id',
@@ -19,6 +19,20 @@ const routers = [
             title: ''
         },
         component: (resolve) => require(['./Edit.vue'], resolve)
+    },
+    {
+        path: '/editModule/:id',
+        meta: {
+            title: ''
+        },
+        component: (resolve) => require(['./EditModule.vue'], resolve)
+    },
+    {
+        path: '/editModule',
+        meta: {
+            title: ''
+        },
+        component: (resolve) => require(['./EditModule.vue'], resolve)
     },
     {
         path: '/detail/:id',

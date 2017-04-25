@@ -46,7 +46,7 @@
     background-color: white;
     border-radius: 5px;
     padding: 15px;
-    min-height: 580px;
+    min-height: 680px;
   }
   .custom-top-menu{
     float: right;
@@ -58,7 +58,7 @@
   }
   .custom-top-menu-logo{
     float: left;
-    margin-left: 5%;
+    margin-left: 47%;
     font-size: 20px;
   }
   .route-a{
@@ -67,14 +67,14 @@
   .custom-left-menu{
     padding: 0px;
   }
+  .router-link-active{
+    color:deepskyblue !important;
+  }
 </style>
 <template>
   <div class="layout">
     <div class="layout-ceiling" style="z-index: 2000;">
       <div class="layout-ceiling-main">
-        <a href="#" class="custom-top-menu right">注册登录</a>
-        <a href="#" class="custom-top-menu">帮助中心</a>
-        <a href="#" class="custom-top-menu">安全中心</a>
         <a href="#" class="custom-top-menu-logo">Api接口文档</a>
       </div>
     </div>
@@ -88,7 +88,8 @@
                 <Icon type="ios-navigate"></Icon>
                 文档管理
             </template>
-              <router-link  to="/edit" class="route-a ivu-menu-item">新增</router-link>
+              <router-link  to="/edit" class="route-a ivu-menu-item">新增接口</router-link>
+              <router-link  to="/editModule" class="route-a ivu-menu-item">新增模块</router-link>
             </Submenu>
             <Submenu name="2">
               <template slot="title">
@@ -126,7 +127,7 @@
             remove (id) {
             },
             fetchData (){
-                this.$http.get('http://localhost:8015/api/ApiDoc/Document/GetApiData').then(response => {
+                this.$http.get(this.ServerPath+'api/ApiDoc/Document/GetApiData').then(response => {
                     this.menuList = response.body;
                 }, response => {
                 });

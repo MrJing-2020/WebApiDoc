@@ -93,7 +93,7 @@
             },
             fetchData (){
                 this.loading = true
-                this.$http.get('http://localhost:8015/api/ApiDoc/Document/GetDocDetail/'+this.$route.params.id).then(response => {
+                this.$http.get(this.ServerPath+'api/ApiDoc/Document/GetDocDetail/'+this.$route.params.id).then(response => {
                     this.loading = false
                     this.detail = response.body;
                 }, response => {

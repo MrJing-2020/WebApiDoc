@@ -3,11 +3,11 @@
         <div class="layout-breadcrumb">
             <Breadcrumb>
                 <Breadcrumb-item href="#">首页</Breadcrumb-item>
-                <Breadcrumb-item href="#">用户相关模块</Breadcrumb-item>
-                <Breadcrumb-item>某应用</Breadcrumb-item>
+                <Breadcrumb-item href="#">模块接口列表</Breadcrumb-item>
             </Breadcrumb>
         </div>
         <div class="layout-content-main">
+            <Button type="primary" @click="add" icon="plus-round" style="margin-bottom: 5px;">新增</Button>
             <Table :context="self" :columns="theader" :data="tbody"></Table>
         </div>
     </div>
@@ -50,6 +50,9 @@
             this.fetchData()
         },
         methods: {
+            add(){
+                this.$router.push('/edit/');
+            },
             show (id) {
                 this.$router.push('/detail/'+id);
             },
@@ -59,7 +62,7 @@
             remove (id) {
             },
             fetchData (){
-                this.$http.get('http://localhost:8015/api/ApiDoc/Document/GetApiDetail/'+this.$route.params.id).then(response => {
+                this.$http.get(this.ServerPath+'api/ApiDoc/Document/GetApiDetail/'+this.$route.params.id).then(response => {
                     this.tbody = response.body;
                 }, response => {
                 });

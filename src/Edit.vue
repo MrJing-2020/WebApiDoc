@@ -62,15 +62,19 @@
         methods: {
             submitForm: function (event) {
                 // POST /someUrl
-                this.$http.post('http://localhost:8015/api/ApiDoc/Document/SubDocData',this.formItem).then(response => {
-                    this.$router.push('/detail/'+this.formItem.Id);
+                this.$http.post(this.ServerPath+'api/ApiDoc/Document/SubDocData',this.formItem).then(response => {
+                    if(this.formItem.Id==undefined||this.formItem.Id==null){
+                        this.$router.push('/apiList/'+this.formItem.ApiId);
+                    }else {
+                        this.$router.push('/detail/'+this.formItem.Id);
+                    }
                 }, response => {
                     // error callback
                 });
             },
             fetchData (){
                 if(this.$route.params.id!=null&&this.$route.params.id!=undefined){
-                    this.$http.get('http://localhost:8015/api/ApiDoc/Document/GetDocDetail/'+this.$route.params.id).then(response => {
+                    this.$http.get(this.ServerPath+'api/ApiDoc/Document/GetDocDetail/'+this.$route.params.id).then(response => {
                         this.formItem = response.body;
                     }, response => {
                     });
@@ -89,7 +93,7 @@
                 this.$router.go(-1)
             },
             getMoudle(){
-                this.$http.get('http://localhost:8015/api/ApiDoc/Document/GetApiData').then(response => {
+                this.$http.get(this.ServerPath+'api/ApiDoc/Document/GetApiData').then(response => {
                     this.moudle = response.body;
                 }, response => {
                 });
