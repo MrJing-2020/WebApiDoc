@@ -53,15 +53,15 @@
             add(){
                 this.$router.push('/edit/');
             },
-            show (id) {
+            show(id){
                 this.$router.push('/detail/'+id);
             },
-            edit (id) {
+            edit(id){
                 this.$router.push('/edit/'+id);
             },
-            remove (id) {
+            remove(id){
             },
-            fetchData (){
+            fetchData(){
                 this.$http.get(this.ServerPath+'api/ApiDoc/Document/GetApiDetail/'+this.$route.params.id).then(response => {
                     this.tbody = response.body;
                 }, response => {
