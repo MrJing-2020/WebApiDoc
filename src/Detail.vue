@@ -12,8 +12,8 @@
         <div class="layout-breadcrumb">
             <Breadcrumb>
                 <Breadcrumb-item href="#">首页</Breadcrumb-item>
-                <Breadcrumb-item href="#">应用中心</Breadcrumb-item>
-                <Breadcrumb-item>某应用</Breadcrumb-item>
+                <Breadcrumb-item href="#">模块接口列表</Breadcrumb-item>
+                <Breadcrumb-item>接口详情</Breadcrumb-item>
             </Breadcrumb>
         </div>
         <div class="layout-content-main">

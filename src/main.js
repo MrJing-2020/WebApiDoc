@@ -14,7 +14,7 @@ Vue.use(iView);
 
 Vue.use(VueHtml5Editor);
 
-Vue.prototype.ServerPath = "http://192.168.3.66:8899/";
+Vue.prototype.ServerPath = "http://localhost:8015/";
 
 const RouterConfig = {
     mode: 'history',

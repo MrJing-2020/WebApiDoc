@@ -22,22 +22,25 @@
                     {
                         title: '接口名',
                         key: 'Name',
+                        width: '20%',
                         render (row, column, index) {
                             return `<Icon type="person"></Icon> <strong>${row.Name}</strong>`;
                         }
                     },
                     {
                         title: 'http方法',
+                        width: '10%',
                         key: 'HttpMethod'
                     },
                     {
                         title: '说明',
+
                         key: 'Description'
                     },
                     {
                         title: '操作',
                         key: 'Id',
-                        width: 200,
+                        width: '20%',
                         align: 'center',
                         render (row, column, index) {
                             return `<i-button type="info" size="small" @click="show('${row.Id}')">查看</i-button> <i-button type="primary" size="small" @click="edit('${row.Id}')">编辑</i-button> <i-button type="error" size="small" @click="remove('${row.Id}')">删除</i-button>`;
